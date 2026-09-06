@@ -1,18 +1,12 @@
 # Mentor AI
 
-короче делай по максимому и пиши чо осталось делать. план не надо делать все итак расписанно
+Персональная образовательная платформа по математике для 7–11 классов: диагностика,
+карта навыков, 14-дневный маршрут, библиотека разборов, ограниченный наставник,
+школьный кабинет и PWA-режим.
 
 This project was built with [Lovable](https://lovable.dev).
 
 **Live app**: https://mentora12.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/de33c6cf-17d3-4bb0-b6ea-e0b1bfdac923).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -24,3 +18,33 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Replit
+
+```sh
+npm install
+npm run dev -- --host 0.0.0.0
+```
+
+Откройте порт, который показывает Replit (обычно 5173). Для production-проверки:
+
+```sh
+npm run build
+npm run preview -- --host 0.0.0.0
+```
+
+Демо-профиль, анкета, ответы диагностики, карта навыков, завершённые уроки и лимит
+наставника сохраняются локально в `localStorage`. Supabase сохранён совместимым с
+заготовкой для дальнейшей многопользовательской авторизации. Печать маршрута
+использует диалог браузера с экспортом в PDF; Telegram — официальный share URL.
+
+## Основные сценарии
+
+- гостевой просмотр библиотеки уроков и открытого демо-профиля;
+- onboarding с классом, целью и локальным профилем;
+- диагностика из 20 заданий с автосохранением, проверкой ответов и результатом по навыкам;
+- персональный маршрут, который использует сохранённую карту навыков;
+- завершение уроков и блок «самостоятельная практика»;
+- наставник с наводящими ответами и лимитом 5 вопросов в день;
+- агрегированный школьный кабинет без имён учеников;
+- установка как PWA, печать маршрута в PDF и отправка ссылки через Telegram.
