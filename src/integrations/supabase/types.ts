@@ -14,16 +14,504 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      activity_log: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          payload: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          payload?: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          payload?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      assessment_answers: {
+        Row: {
+          ai_feedback: string | null
+          answer: string
+          assessment_id: string
+          id: string
+          is_correct: boolean | null
+          max_score: number
+          question_id: string
+          score: number
+          seconds_spent: number
+          skill: string
+          transfer: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_feedback?: string | null
+          answer?: string
+          assessment_id: string
+          id?: string
+          is_correct?: boolean | null
+          max_score?: number
+          question_id: string
+          score?: number
+          seconds_spent?: number
+          skill: string
+          transfer?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_feedback?: string | null
+          answer?: string
+          assessment_id?: string
+          id?: string
+          is_correct?: boolean | null
+          max_score?: number
+          question_id?: string
+          score?: number
+          seconds_spent?: number
+          skill?: string
+          transfer?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_answers_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessments: {
+        Row: {
+          day: number | null
+          finished_at: string | null
+          grade: number
+          id: string
+          kind: string
+          max_score: number | null
+          question_ids: Json
+          skill_scores: Json | null
+          started_at: string
+          status: string
+          total_score: number | null
+          user_id: string
+        }
+        Insert: {
+          day?: number | null
+          finished_at?: string | null
+          grade?: number
+          id?: string
+          kind?: string
+          max_score?: number | null
+          question_ids?: Json
+          skill_scores?: Json | null
+          started_at?: string
+          status?: string
+          total_score?: number | null
+          user_id: string
+        }
+        Update: {
+          day?: number | null
+          finished_at?: string | null
+          grade?: number
+          id?: string
+          kind?: string
+          max_score?: number | null
+          question_ids?: Json
+          skill_scores?: Json | null
+          started_at?: string
+          status?: string
+          total_score?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lesson_progress: {
+        Row: {
+          completed_at: string | null
+          day: number | null
+          id: string
+          lesson_id: string
+          max_score: number | null
+          practice: Json
+          score: number | null
+          stage: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          day?: number | null
+          id?: string
+          lesson_id: string
+          max_score?: number | null
+          practice?: Json
+          score?: number | null
+          stage?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          day?: number | null
+          id?: string
+          lesson_id?: string
+          max_score?: number | null
+          practice?: Json
+          score?: number | null
+          stage?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      opportunities: {
+        Row: {
+          archived: boolean
+          cost: string
+          country: string
+          created_at: string
+          deadline: string | null
+          deadline_note: string
+          format: string
+          grades: number[]
+          id: string
+          last_checked: string
+          level: string
+          official_url: string
+          organizer: string
+          region: string | null
+          registration_open: boolean
+          registration_url: string | null
+          requirements: string
+          selection_path: string
+          source_name: string
+          subject: string
+          title: string
+        }
+        Insert: {
+          archived?: boolean
+          cost?: string
+          country?: string
+          created_at?: string
+          deadline?: string | null
+          deadline_note?: string
+          format?: string
+          grades?: number[]
+          id?: string
+          last_checked?: string
+          level?: string
+          official_url: string
+          organizer: string
+          region?: string | null
+          registration_open?: boolean
+          registration_url?: string | null
+          requirements?: string
+          selection_path?: string
+          source_name: string
+          subject?: string
+          title: string
+        }
+        Update: {
+          archived?: boolean
+          cost?: string
+          country?: string
+          created_at?: string
+          deadline?: string | null
+          deadline_note?: string
+          format?: string
+          grades?: number[]
+          id?: string
+          last_checked?: string
+          level?: string
+          official_url?: string
+          organizer?: string
+          region?: string | null
+          registration_open?: boolean
+          registration_url?: string | null
+          requirements?: string
+          selection_path?: string
+          source_name?: string
+          subject?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      opportunity_clicks: {
+        Row: {
+          clicked_at: string
+          id: string
+          opportunity_id: string
+          user_id: string
+        }
+        Insert: {
+          clicked_at?: string
+          id?: string
+          opportunity_id: string
+          user_id: string
+        }
+        Update: {
+          clicked_at?: string
+          id?: string
+          opportunity_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "opportunity_clicks_opportunity_id_fkey"
+            columns: ["opportunity_id"]
+            isOneToOne: false
+            referencedRelation: "opportunities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          city: string
+          connection_quality: string
+          country: string
+          created_at: string
+          daily_minutes: number
+          goal: string
+          grade: number
+          has_mentor: boolean
+          id: string
+          language: string
+          name: string
+          onboarded: boolean
+          org_code: string | null
+          school: string | null
+          self_level: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string
+          connection_quality?: string
+          country?: string
+          created_at?: string
+          daily_minutes?: number
+          goal?: string
+          grade?: number
+          has_mentor?: boolean
+          id: string
+          language?: string
+          name?: string
+          onboarded?: boolean
+          org_code?: string | null
+          school?: string | null
+          self_level?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          connection_quality?: string
+          country?: string
+          created_at?: string
+          daily_minutes?: number
+          goal?: string
+          grade?: number
+          has_mentor?: boolean
+          id?: string
+          language?: string
+          name?: string
+          onboarded?: boolean
+          org_code?: string | null
+          school?: string | null
+          self_level?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      route_days: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          day: number
+          difficulty: string
+          duration_min: number
+          goal: string
+          id: string
+          kind: string
+          lesson_id: string | null
+          outcome: string
+          reason: string
+          score: number | null
+          skill: string
+          status: string
+          topic: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          day: number
+          difficulty?: string
+          duration_min?: number
+          goal?: string
+          id?: string
+          kind?: string
+          lesson_id?: string | null
+          outcome?: string
+          reason?: string
+          score?: number | null
+          skill: string
+          status?: string
+          topic: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          day?: number
+          difficulty?: string
+          duration_min?: number
+          goal?: string
+          id?: string
+          kind?: string
+          lesson_id?: string | null
+          outcome?: string
+          reason?: string
+          score?: number | null
+          skill?: string
+          status?: string
+          topic?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_opportunities: {
+        Row: {
+          created_at: string
+          id: string
+          opportunity_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          opportunity_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          opportunity_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_opportunities_opportunity_id_fkey"
+            columns: ["opportunity_id"]
+            isOneToOne: false
+            referencedRelation: "opportunities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      skill_states: {
+        Row: {
+          attempts: number
+          base_correct: number
+          base_total: number
+          error_types: Json
+          id: string
+          last_checked_at: string | null
+          mastery: number
+          no_ai_score: number | null
+          skill: string
+          status: string
+          transfer_correct: number
+          transfer_total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          base_correct?: number
+          base_total?: number
+          error_types?: Json
+          id?: string
+          last_checked_at?: string | null
+          mastery?: number
+          no_ai_score?: number | null
+          skill: string
+          status?: string
+          transfer_correct?: number
+          transfer_total?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          base_correct?: number
+          base_total?: number
+          error_types?: Json
+          id?: string
+          last_checked_at?: string | null
+          mastery?: number
+          no_ai_score?: number | null
+          skill?: string
+          status?: string
+          transfer_correct?: number
+          transfer_total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          org_name: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          org_name?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          org_name?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "student" | "org" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +638,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["student", "org", "admin"],
+    },
   },
 } as const
