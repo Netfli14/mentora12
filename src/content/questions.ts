@@ -458,7 +458,7 @@ export function buildDiagnosticSet(grade: number): string[] {
     if (base[0]) ids.push(base[0].id);
     if (transfer[0]) ids.push(transfer[0].id);
     // если для навыка есть несколько заданий на перенос — добираем ещё одно
-    if (transfer.length > 1 && base.length === 0) ids.push(transfer[1].id);
+    if (transfer[1] && base.length === 0) ids.push(transfer[1].id);
   }
   return shuffle(ids);
 }
@@ -467,7 +467,9 @@ export function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+    const temp = copy[i]!;
+    copy[i] = copy[j]!;
+    copy[j] = temp;
   }
   return copy;
 }
